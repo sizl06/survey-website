@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SurveyPro - Customer Satisfaction</title>
+    <!-- Previous styles remain the same until modal styles -->
+    <style>
+    /* ... (keeping all previous styles) ... */
+
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1000;
+    }
+
+    .modal-content {
+        position: relative;
+        background-color: white;
+        margin: 15% auto;
+        padding: 2rem;
+        width: 90%;
+        max-width: 500px;
+        border-radius: 12px;
+        text-align: center;
+        animation: modalSlideIn 0.3s ease-out;
+    }
+
+    @keyframes modalSlideIn {
+        from {
+            transform: translateY(-100px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .modal-title {
+        color: #5D4E9C;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .modal-text {
+        color: #666;
+        margin-bottom: 1.5rem;
+    }
+
+    .modal-btn {
+        padding: 0.75rem 2rem;
+        background-color: #5D4E9C;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .modal-btn:hover {
+        background-color: #8475BD;
+    }
+       * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    background-color: #F8F7FF;
+    color: #2D2640;
+    line-height: 1.6;
+}
+
+header {
+    background-color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #5D4E9C;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.progress {
+    color: #8475BD;
+    font-size: 0.9rem;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.poll-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.poll-title {
+    color: #5D4E9C;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.poll-description {
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.rating-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.rating-item {
+    border: 1px solid #ddd;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.rating-question {
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.rating-options {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.rating-option {
+    flex: 1;
+    min-width: 80px;
+}
+
+.rating-option input[type="radio"] {
+    display: none;
+}
+
+.rating-option label {
+    display: block;
+    text-align: center;
+    padding: 0.8rem;
+    border: 2px solid #8475BD;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.rating-option label:hover {
+    background-color: #8475BD;
+    color: white;
+}
+
+.rating-option input[type="radio"]:checked + label {
+    background-color: #5D4E9C;
+    color: white;
+    border-color: #5D4E9C;
+}
+
+.feedback-box {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #8475BD;
+    border-radius: 8px;
+    margin: 1rem 0;
+    min-height: 100px;
+    resize: vertical;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 2rem;
+    background-color: #5D4E9C;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #8475BD;
+}
+
+.poll-footer {
+    margin-top: 1rem;
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+    .rating-options {
+        flex-direction: column;
+    }
+    
+    .rating-option {
+        width: 100%;
+    }
+}
+
+.modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1000;
+    }
+
+    .modal-content {
+        position: relative;
+        background-color: white;
+        margin: 15% auto;
+        padding: 2rem;
+        width: 90%;
+        max-width: 500px;
+        border-radius: 12px;
+        text-align: center;
+        animation: modalSlideIn 0.3s ease-out;
+    }
+
+    @keyframes modalSlideIn {
+        from {
+            transform: translateY(-100px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .modal-title {
+        color: #5D4E9C;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .modal-text {
+        color: #666;
+        margin-bottom: 1.5rem;
+    }
+
+    .modal-btn {
+        padding: 0.75rem 2rem;
+        background-color: #5D4E9C;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .modal-btn:hover {
+        background-color: #8475BD;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">SurveyPro</a>
+        <span class="progress">Question 3 of 3</span>
+    </header>
+
+    <div class="container">
+        <form class="poll-card" id="satisfactionForm">
+            <h1 class="poll-title">Rate Your Recent Shopping Experience</h1>
+            <p class="poll-description">Please help us improve our service by rating your experience with our online store.</p>
+            
+            <div class="rating-group">
+                <div class="rating-item">
+                    <p class="rating-question">How satisfied were you with the checkout process?</p>
+                    <div class="rating-options">
+                        <div class="rating-option">
+                            <input type="radio" id="checkout-1" name="checkout" value="1">
+                            <label for="checkout-1">Very Poor</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="checkout-2" name="checkout" value="2">
+                            <label for="checkout-2">Poor</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="checkout-3" name="checkout" value="3">
+                            <label for="checkout-3">Average</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="checkout-4" name="checkout" value="4">
+                            <label for="checkout-4">Good</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="checkout-5" name="checkout" value="5">
+                            <label for="checkout-5">Excellent</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rating-item" >
+                    <p class="rating-question">How would you rate our product selection?</p>
+                    <div class="rating-options">
+                        <div class="rating-option">
+                            <input type="radio" id="selection-1" name="selection" value="1">
+                            <label for="selection-1">Very Poor</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="selection-2" name="selection" value="2">
+                            <label for="selection-2">Poor</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="selection-3" name="selection" value="3">
+                            <label for="selection-3">Average</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="selection-4" name="selection" value="4">
+                            <label for="selection-4">Good</label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" id="selection-5" name="selection" value="5">
+                            <label for="selection-5">Excellent</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="rating-question">Do you have any additional feedback for us?</p>
+            <textarea class="feedback-box" placeholder="Share your thoughts with us..."></textarea>
+
+            <button type="submit" class="submit-btn">Submit Feedback</button>
+
+            <p class="poll-footer">Your feedback helps us improve our services for all customers.</p>
+        </form>
+    </div>
+
+    <!-- Thank You Modal -->
+    <div class="modal" id="thankYouModal">
+        <div class="modal-content">
+            <h2 class="modal-title">Thank You for Your Feedback!</h2>
+            <p class="modal-text">We greatly appreciate you taking the time to share your experience with us. Your feedback will help us improve our services.</p>
+            <button class="modal-btn" onclick="window.location.href='./result.html'">View Results</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('satisfactionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const checkoutRating = document.querySelector('input[name="checkout"]:checked');
+            const selectionRating = document.querySelector('input[name="selection"]:checked');
+            
+            if (!checkoutRating || !selectionRating) {
+                alert('Please rate both the checkout process and product selection before submitting.');
+                return;
+            }
+
+            document.getElementById('thankYouModal').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

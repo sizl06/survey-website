@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviornment Issue Survey - SurveyPro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: rgba(84, 60, 174, 0.05);
+            color: #2d1846;
+            line-height: 1.6;
+        }
+
+        .nav {
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            box-shadow: 0 2px 4px rgba(84, 60, 174, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: rgb(84, 60, 174);
+            text-decoration: none;
+        }
+
+        .survey-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(84, 60, 174, 0.1);
+        }
+
+        .survey-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .survey-title {
+            font-size: 32px;
+            color: rgb(64, 45, 134);
+            margin-bottom: 10px;
+        }
+
+        .survey-description {
+            color: rgb(84, 60, 174);
+            font-size: 16px;
+        }
+
+        .question-group {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid rgba(84, 60, 174, 0.2);
+            border-radius: 5px;
+        }
+
+        .question {
+            font-size: 18px;
+            color: rgb(64, 45, 134);
+            margin-bottom: 15px;
+        }
+
+        .required {
+            color: #dc2626;
+            margin-left: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(84, 60, 174, 0.3);
+            border-radius: 5px;
+            margin-top: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: rgb(84, 60, 174);
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            accent-color: rgb(84, 60, 174);
+            width: 18px;
+            height: 18px;
+        }
+
+        .rating-group {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px 10px;
+        }
+
+        .rating-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: 80px;
+        }
+
+        .rating-number {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(84, 60, 174, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .rating-number::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .rating-number:hover {
+            background-color: rgb(84, 60, 174);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .rating-number:hover::after {
+            border-color: rgba(84, 60, 174, 0.2);
+            transform: scale(1.1);
+        }
+
+        .rating-label {
+            font-size: 12px;
+            color: rgb(84, 60, 174);
+            text-align: center;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .submit-btn {
+            background: rgb(84, 60, 174);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: rgb(64, 45, 134);
+        }
+
+        @media (max-width: 768px) {
+            .survey-container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            .nav {
+                padding: 15px 20px;
+            }
+
+            .rating-group {
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: center;
+            }
+
+            .rating-option {
+                width: 70px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <a href="#" class="logo">SurveyPro</a>
+    </nav>
+
+    <div class="survey-container">
+        <div class="survey-header">
+            <h1 class="survey-title">Enviornment Issue Survey</h1>
+            <p class="survey-description">Tell us about the enviornmentnear you and the issues you face</p>
+        </div>
+
+        <form>
+            <div class="question-group">
+                <label class="question">Name<span class="required">*</span></label>
+                <input type="text" required placeholder="Enter your full name">
+            </div>
+
+            <div class="question-group">
+                <label class="question">Email<span class="required">*</span></label>
+                <input type="email" required placeholder="Enter your email address">
+            </div>
+
+            
+
+            <div class="question-group">
+                <label class="question">Please select one of the following statement<span class="required">*</span></label>
+                <div class="checkbox-group">
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="analytics">
+                        Our enviornment is in good condition.
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="reports">
+                        Our enviornment is in trouble but a little effort will save it.
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="templates">
+                        Our enviornment is in bad condition and alot of effort is needed to save it.
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="sharing">
+                        Our enviornment is in such a bad condition there is nothing much to save it.
+                    </label>
+
+                </div>
+            </div>
+
+
+            <div class="question-group">
+                <label class="question">In your opinion, which enviornment problem is the worst?<span class="required">*</span></label>
+                <div class="checkbox-group">
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="analytics">
+                        Ozone depletion
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="reports">
+                        Toxic Waste
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="templates">
+                        Global Warming
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="sharing">
+                        Water Pollution
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="sharing">
+                        Air Pollution
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="sharing">
+                        Deforestaion
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="sharing">
+                        Other
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="question-group">
+                <label class="question">In your opinion, which of the following is the worst threat to enviornment ?<span class="required">*</span></label>
+                <div class="checkbox-group">
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="analytics">
+                        Industries
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="reports">
+                        Government
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="templates">
+                        Individual People
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="sharing">
+                        Other
+                    </label>
+                   
+                </div>
+            </div>
+
+
+
+            <div class="question-group">
+                <label class="question">Do you think the current concern over the enviornment issue justified?<span class="required">*</span></label>
+                <div class="rating-group">
+                    <div class="rating-option">
+                        <div class="rating-number">1</div>
+                        <div class="rating-label">YES</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">2</div>
+                        <div class="rating-label">NO</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">3</div>
+                        <div class="rating-label">NOT SUREE</div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="question-group">
+                <label class="question">How would you describe the future of our enviornment<span class="required">*</span></label>
+                <div class="checkbox-group">
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="analytics">
+                        Bright and Hopefull
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="reports">
+                        Challenging
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="templates">
+                        Depressing
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="sharing">
+                        Uncertain
+                    </label>
+                </div>
+            </div>
+
+
+            
+            <div class="question-group">
+                <label class="question">Which of the following would be the only solution for our healthy enviornment<span class="required">*</span></label>
+                <div class="checkbox-group">
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="analytics">
+                        Industries that pollute the enviornment shut down
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="reports">
+                        Finding new technologies that would overcome enviornment issues
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="templates">
+                        People learn to be more efficient users of energy resources
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="sharing">
+                        Government find new economic policies that would minimize pollution
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="sharing">
+                        Other
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="question-group">
+                <label class="question">Do you think health has alraedy been affected bt the pollution?<span class="required">*</span></label>
+                <div class="rating-group">
+                    <div class="rating-option">
+                        <div class="rating-number">1</div>
+                        <div class="rating-label">YES</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">2</div>
+                        <div class="rating-label">NO</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">3</div>
+                        <div class="rating-label">MAYBE</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question-group">
+                <label class="question">In the following 20 years, our enviornment will be.<span class="required">*</span></label>
+                <div class="checkbox-group">
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="analytics">
+                        Destroyed
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="reports">
+                        Better than it is now
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="templates">
+                        Worst than it is now
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="sharing">
+                        Same as it is now
+                    </label>
+                  
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="question-group">
+                <label class="question">What improvements inthe enviornment would you like to see and help us with?</label>
+                <textarea rows="4" placeholder="Share your suggestions..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn"><a href="./index.html" style="text-decoration: none; color: white;">Submit Survey</a></button>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Feedback Survey - SurveyPro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: rgba(84, 60, 174, 0.05);
+            color: #2d1846;
+            line-height: 1.6;
+        }
+
+        .nav {
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            box-shadow: 0 2px 4px rgba(84, 60, 174, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: rgb(84, 60, 174);
+            text-decoration: none;
+        }
+
+        .survey-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(84, 60, 174, 0.1);
+        }
+
+        .survey-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .survey-title {
+            font-size: 32px;
+            color: rgb(64, 45, 134);
+            margin-bottom: 10px;
+        }
+
+        .survey-description {
+            color: rgb(84, 60, 174);
+            font-size: 16px;
+        }
+
+        .question-group {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid rgba(84, 60, 174, 0.2);
+            border-radius: 5px;
+        }
+
+        .question {
+            font-size: 18px;
+            color: rgb(64, 45, 134);
+            margin-bottom: 15px;
+        }
+
+        .required {
+            color: #dc2626;
+            margin-left: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(84, 60, 174, 0.3);
+            border-radius: 5px;
+            margin-top: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: rgb(84, 60, 174);
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            accent-color: rgb(84, 60, 174);
+            width: 18px;
+            height: 18px;
+        }
+
+        .rating-group {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px 10px;
+        }
+
+        .rating-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: 80px;
+        }
+
+        .rating-number {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(84, 60, 174, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .rating-number::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .rating-number:hover {
+            background-color: rgb(84, 60, 174);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .rating-number:hover::after {
+            border-color: rgba(84, 60, 174, 0.2);
+            transform: scale(1.1);
+        }
+
+        .rating-label {
+            font-size: 12px;
+            color: rgb(84, 60, 174);
+            text-align: center;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .submit-btn {
+            background: rgb(84, 60, 174);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: rgb(64, 45, 134);
+        }
+
+        @media (max-width: 768px) {
+            .survey-container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            .nav {
+                padding: 15px 20px;
+            }
+
+            .rating-group {
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: center;
+            }
+
+            .rating-option {
+                width: 70px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <a href="#" class="logo">SurveyPro</a>
+    </nav>
+
+    <div class="survey-container">
+        <div class="survey-header">
+            <h1 class="survey-title">Student Satisfaction form</h1>
+            <p class="survey-description">Tell us how satisfied are you with the studying material and enviornment</p>
+        </div>
+
+        <form>
+            <div class="question-group">
+                <label class="question">Name<span class="required">*</span></label>
+                <input type="text" required placeholder="Enter your full name">
+            </div>
+
+            <div class="question-group">
+                <label class="question">Email<span class="required">*</span></label>
+                <input type="email" required placeholder="Enter your email address">
+            </div>
+
+            <div class="question-group">
+                <label class="question">Roll Number<span class="required">*</span></label>
+                <input type="email" required placeholder="Enter your email address">
+            </div>
+
+            <div class="question-group">
+                <label class="question">How satisfied are you with the studying enviornment?<span class="required">*</span></label>
+                <div class="rating-group">
+                    <div class="rating-option">
+                        <div class="rating-number">1</div>
+                        <div class="rating-label">Very Dissatisfied</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">2</div>
+                        <div class="rating-label">Dissatisfied</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">3</div>
+                        <div class="rating-label">Neutral</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">4</div>
+                        <div class="rating-label">Satisfied</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">5</div>
+                        <div class="rating-label">Very Satisfied</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <label class="question">Do you find the studying material provided helpful and accurate?<span class="required">*</span></label>
+                <div class="rating-group">
+                    <div class="rating-option">
+                        <div class="rating-number">1</div>
+                        <div class="rating-label">Very Helpful</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">2</div>
+                        <div class="rating-label">Helpful</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">3</div>
+                        <div class="rating-label">Some What Helpful</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">4</div>
+                        <div class="rating-label">Average</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">5</div>
+                        <div class="rating-label">Not Helpful</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="question-group">
+                <label class="question">Do the teacher and mentors guide and help you proper ?<span class="required">*</span></label>
+                <div class="rating-group">
+                    <div class="rating-option">
+                        <div class="rating-number">1</div>
+                        <div class="rating-label">Very Helpful</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">2</div>
+                        <div class="rating-label">Helpful</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">3</div>
+                        <div class="rating-label">Some What Helpful</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">4</div>
+                        <div class="rating-label">Not Helpful</div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+
+
+
+            <div class="question-group">
+                <label class="question">what is teh course you are enrolled in<span class="required">*</span></label>
+                <div class="checkbox-group">
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="analytics">
+                        CSE/CSE=AT
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="reports">
+                        BBA
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="templates">
+                        Civil engineering
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="sharing">
+                        LL.B
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="sharing">
+                        BSc
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="radio" name="features" value="sharing">
+                        Other
+                    </label>
+                </div>
+            </div>
+
+
+
+
+            <div class="question-group">
+                <label class="question">Are you satisfied with the teaching method of your teacher?<span class="required">*</span></label>
+                <div class="rating-group">
+                    <div class="rating-option">
+                        <div class="rating-number">1</div>
+                        <div class="rating-label">Very Dissatisfied</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">2</div>
+                        <div class="rating-label">Dissatisfied</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">3</div>
+                        <div class="rating-label">Neutral</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">4</div>
+                        <div class="rating-label">Satisfied</div>
+                    </div>
+                    <div class="rating-option">
+                        <div class="rating-number">5</div>
+                        <div class="rating-label">Very Satisfied</div>
+                    </div>
+                </div>
+            </div>
+            
+
+
+
+            <div class="question-group">
+                <label class="question">Does often fell that the pressure is too much?<span
+                        class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="recommend" value="very-likely">
+                        Very often
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="recommend" value="likely">
+                        often
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="recommend" value="neutral">
+                        Never
+                    </label>
+                </div>
+            </div>
+
+
+
+            <div class="question-group">
+                <label class="question">Does your Senior help and assist you when you need them?<span
+                        class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="recommend" value="very-likely">
+                        They assist all the time
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="recommend" value="likely">
+                        They assist often
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="recommend" value="neutral">
+                        Never
+                    </label>
+                </div>
+            </div>
+
+
+
+
+            <div class="question-group">
+                <label class="question">What improvements would you like to see?</label>
+                <textarea rows="4" placeholder="Share your suggestions..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn"><a href="./index.html" style="text-decoration: none; color: white;">Submit Feedback</a></button>
+        </form>
+    </div>
+</body>
+
+</html>
